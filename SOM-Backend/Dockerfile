@@ -1,14 +1,11 @@
-FROM python:3.8
-#copier le fichier requirements qui contients les dépendances puis les installer
+FROM python:3.10.7
+#copier le fichier requirements.txt qui contient les dépendances puis les installer
 COPY requirements.txt .
-RUN pip install -r requirements.txt
-#copier le reste des fichiers de l'application
-COPY . .
+RUN pip  install -r requirements.txt
+# Copy the current directory contents into the container at /app
+COPY . /app
 #Définir le répertoire de travail de l'application
 WORKDIR /app
-#Définir le port de l'application :
-EXPOSE 8082
-#Définir l'entrepoint de l'application
-ENTRYPOINT["python"]
-#Définir le script principal de l'application
-CMD ["main.py"]
+EXPOSE 8000
+# Run the command to start uvicorn when the container launches
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]

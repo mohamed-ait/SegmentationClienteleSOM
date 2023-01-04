@@ -14,7 +14,7 @@ uploadFile(file: File) {
   const formData = new FormData();
   formData.append('file', file);
 
-  return this.http.post('http://localhost:8000/upload', formData);
+  return this.http.post('http://localhost:8085/upload', formData);
 }
  onSubmit(){
     console.log( this.inputData);
